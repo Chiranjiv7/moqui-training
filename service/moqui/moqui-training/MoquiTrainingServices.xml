@@ -37,5 +37,53 @@
             <parameter name="trainingId"/>
         </out-parameters>
     </service>
-    
+
+<!-- Find a training detail-->
+    <service verb="find" noun="TrainingDetail">
+        <in-parameters>
+            <parameter name="trainingName"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="trainingInfo" type="list"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.MoquiTraining" list="trainingInfo">
+                <econdition field-name="trainingName"/>
+                <select-field field-name="trainingName,trainingId,trainingDate"/>
+            </entity-find>
+
+        </actions>
+    </service>
+
+<!-- Create or Update-->
+
+
+    <service verb="store" noun="StoreTraining">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.training.MoquiTraining" include="nonpk"/>
+            <parameter name="trainingName" required="true"/>
+        </in-parameters>
+
+        <out-parameters>
+            <parameter name="trainingId"/>
+            <parameter name="trainingName"/>
+        </out-parameters>
+
+        <actions>
+            <entity-find entity-name="moqui.training.MoquiTraining" list="trainingInfo">
+                <econdition field-name="trainingName" ignore-case="true"/>
+            </entity-find>
+            <if condition="trainingInfo">
+                <then>
+                    <set field="training" from="trainingInfo.first"></set>
+                    <entity-set value-field="training" map="context"></entity-set>
+                    <entity-update value-field="training"/>
+                    <set field="trainingId" from="training.trainingId"></set>
+                </then>
+                <else>
+                    <service-call name="create#moqui.training.MoquiTraining" in-map="context" out-map="conext"/>
+                </else>
+            </if>
+        </actions>
+    </service>
 </services>
