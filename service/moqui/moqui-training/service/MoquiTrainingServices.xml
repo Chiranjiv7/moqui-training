@@ -13,8 +13,7 @@
     <service verb="create" noun="MoquiTrainingInline">
         <in-parameters>
             <parameter name="trainingName" required="true"/>
-            <parameter name="trainingDate">
-            <time-range after="now" format="yyyy/mm/dd"/></parameter>
+            <parameter name="trainingDate"/>
             <parameter name="trainingPrice"/>
             <parameter name="trainingDuration"/>
         </in-parameters>
@@ -22,7 +21,7 @@
             <parameter name="trainingId"/>
         </out-parameters>
         <actions>
-            <service-call name="create#moqui.training.MoquiTraining" in-map="context"/>
+            <service-call name="create#moqui.training.MoquiTraining" in-map="context" out-map="context"/>
         </actions>
     </service>
 
@@ -87,28 +86,7 @@
         </actions>
     </service>
 
-<!-- create a new product service -->
-    <service verb="create" noun="ProductIdMantle">
-        <in-parameters>
 
-            <parameter name="productName"/>
-            <parameter name="description"/>
-            <parameter name="price" />
-            <parameter name="priceUomId" default-value="USD"/>
-
-        </in-parameters>
-
-        <out-parameters>
-            <parameter name="productId"/>
-        </out-parameters>
-        <actions>
-            <service-call name="create#mantle.product.Product" in-map="context" out-map="context"/>
-            <if condition = "price">
-                <service-call name = "create#mantle.product.ProductPrice" in-map="context" out-map="context"/>
-            </if>
-
-        </actions>
-    </service>
 
 </services>
 

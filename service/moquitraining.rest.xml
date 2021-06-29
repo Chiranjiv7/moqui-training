@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+
+<!-- General Guideline Verbs: GET=find, POST=create, PUT=store (create or update), PATCH=update, DELETE=delete  -->
+
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-2.1.xsd"
+          name="moqui.training" displayName="MoquiTraining REST API" version="2.0.0">
+    <resource name="training" require-authentication="anonymous-all">
+        <method type="get"><entity name="MoquiTraining" operation="list"/></method>
+        <method type="post"><service name="moqui.moqui-training.service.MoquiTrainingServices.create#MoquiTrainingInline"/></method>
+
+
+    <id name="trainingId">
+        <method type="get"><entity name="MoquiTraining" operation="one"/></method>
+        <method type="delete"><entity name="MoquiTraining" operation="delete"/></method>
+    </id>
+    </resource>
+
+</resource>
