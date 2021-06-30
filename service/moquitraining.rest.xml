@@ -28,4 +28,8 @@ along with this software (see the LICENSE.md file). If not, see
     </id>
     </resource>
 
+    <resource name="trainingUpdate" require-authentication="anonymous-all">
+        <method type="put"><service name="moqui.moqui-training.service.MoquiTrainingServices.store#StoreTraining"/></method>
+    </resource>
+
 </resource>

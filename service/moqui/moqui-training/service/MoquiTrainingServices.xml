@@ -80,7 +80,7 @@
                     <set field="trainingId" from="training.trainingId"></set>
                 </then>
                 <else>
-                    <service-call name="create#moqui.training.MoquiTraining" in-map="context" out-map="conext"/>
+                    <service-call name="create#moqui.training.MoquiTraining" in-map="context" out-map="context"/>
                 </else>
             </if>
         </actions>
